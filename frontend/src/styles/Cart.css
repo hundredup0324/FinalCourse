@@ -1,0 +1,59 @@
+.cart-page{
+    margin-bottom: 5%;
+
+    
+
+}
+
+.cart-page img{
+
+    width: 500px ;
+    margin-left: 40px;
+
+
+}
+
+.cart-page h2{
+
+    margin-left: 3%;
+}
+
+.cart-page button{
+
+    display: grid;
+    margin-left: 3%;
+    padding: 10px 20px;
+    border-radius: 5%;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    background-color:#008000;
+    color:aliceblue;
+    font-weight: bold;
+
+
+}
+
+.cart-page h1{
+
+    margin-left: 3%;
+
+
+
+}
+
+.cart-page p{
+
+    margin-left: 3%;
+    
+}
+
+.confirm{
+
+    margin-top: 50px;
+
+
+
+
+}
+

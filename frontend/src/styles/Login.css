@@ -1,0 +1,94 @@
+/*make width/height include padding and borders */
+* {
+  box-sizing: border-box;
+}
+
+/*remove default margin/padding and set full height */
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.login-container {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f9f0f0;
+  }
+  
+  .login-box {
+    width: 400px;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .login-box h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .login-box p {
+    margin: 5px 0;
+    color: #666;
+  }
+  
+  .login-box input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  .login-box .error {
+    color: red;
+    font-size: 14px;
+    margin-top: -5px;
+  }
+  
+  .forgot-password {
+    color: #008000;
+    font-size: 14px;
+    cursor: pointer;
+    margin-bottom: 20px;
+  }
+  
+  .login-button {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #008000;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .login-button:hover {
+    background-color: #006600;
+  }
+  
+  .create-account {
+    margin-top: 20px;
+    color: #555;
+    font-size: 14px;
+  }
+  
+  .register-link {
+    color: #008000;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .register-link:hover {
+    text-decoration: underline;
+  }
+  

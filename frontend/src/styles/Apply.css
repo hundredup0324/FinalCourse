@@ -1,0 +1,48 @@
+.apply-page{
+    
+    margin-bottom: 5%;
+
+
+
+}
+
+.apply-page h1{
+
+    margin-left: 3%;
+
+}
+
+
+.apply-page img  {
+
+    width: 800px ;
+    margin-left: 40px;
+
+}
+
+.apply-page h2 {
+    
+    margin-left: 40px;
+
+} 
+
+.apply-page p {
+    
+    margin-left: 40px;
+
+} 
+
+.apply-page button {
+    
+    margin-left: 40px;
+    padding: 10px 20px;
+    border-radius: 5%;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    background-color:#008000;
+    color:aliceblue;
+    font-weight: bold;
+
+
+} 

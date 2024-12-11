@@ -1,0 +1,22 @@
+import React, { useEffect, useState }  from 'react';
+function Product() {
+    const[Courses, setCourses] = useState([]);
+    useEffect (() => {
+        fetch('https: //api.example.com/courses')
+        .then (response => response.json())
+        .then(data => setCourses(data));
+    }, []);
+    return (
+        <div className="Courses page">
+            {courses.map(courses => (
+            <div key={courses.id} className="Course">
+                <h4>{course.title}</h4>
+                <p>{course.description}</p>
+                <button> Add to cart</button>
+            </div>
+           )) }
+        </div>
+    );
+}
+export default course;
+#course page file
