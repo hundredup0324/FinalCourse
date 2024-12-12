@@ -64,6 +64,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'api',
 ]
+# CSRF_TRUSTED_ORIGINS = ['http://localhost:3000', 'https://your-frontend-domain.com']
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -77,6 +78,10 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'backend.urls'
+AUTHENTICATION_BACKENDS = [
+    'api.backends.EmailAuthBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]
 
 TEMPLATES = [
     {
@@ -103,6 +108,7 @@ DATABASES = {
         default=os.getenv('DATABASE_URL', 'postgres://team:team6@localhost:5432/ecommerce')
     )
 }
+CORS_ALLOW_CREDENTIALS = True
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators

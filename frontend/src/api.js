@@ -1,18 +1,24 @@
-import axios from "axios";
 import API_BASE_URL from "./config"; // Ensure this points to your backend base URL
 import { getCSRFToken } from './utils/csrf';
+import {setCookie} from "./utils/auth";
 
-const instance = axios.create({
-  
-});
 const csrfToken = getCSRFToken();
+
 
 
 // Fetch all courses
 export const fetchCourses = async () => {
   try {
-    const response = await instance.get(`${API_BASE_URL}/courses/`);
-    return response.data;
+    // const response = await instance.get(`${API_BASE_URL}/courses/`);
+    const response = await fetch(`${API_BASE_URL}/courses/`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': csrfToken,
+      },
+    });
+    const responseData = await response.json();
+    return responseData;
   } catch (error) {
     console.error("Error fetching courses:", error);
     throw error;
@@ -22,8 +28,16 @@ export const fetchCourses = async () => {
 // Fetch single course details
 export const fetchCourseDetails = async (id) => {
   try {
-    const response = await instance.get(`${API_BASE_URL}/courses/${id}/fetch_details/`);
-    return response.data;
+    // const response = await instance.get(`${API_BASE_URL}/courses/${id}/fetch_details/`);
+    const response = await fetch(`${API_BASE_URL}/courses/${id}/fetch_details/`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': csrfToken,
+      },
+    });
+    const responseData = await response.json();
+    return responseData;
   } catch (error) {
     console.error(`Error fetching course ${id}:`, error);
     throw error;
@@ -33,8 +47,17 @@ export const fetchCourseDetails = async (id) => {
 // Add course to cart
 export const addCourseToCart = async (courseId) => {
   try {
-    const response = await instance.post(`${API_BASE_URL}/cart/`, { id: courseId });
-    return response.data;
+    // const response = await instance.post(`${API_BASE_URL}/cart/`, { id: courseId });
+    const response = await fetch(`${API_BASE_URL}/cart/`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': csrfToken,
+      },
+      body: JSON.stringify({id: courseId}),
+    });
+    const responseData = await response.json();
+    return responseData;
   } catch (error) {
     console.error("Error adding course to cart:", error);
     throw error;
@@ -44,8 +67,18 @@ export const addCourseToCart = async (courseId) => {
 // Fetch cart items
 export const fetchCartItems = async () => {
   try {
-    const response = await instance.get(`${API_BASE_URL}/cart/`);
-    return response.data;
+    // const response = await instance.get(`${API_BASE_URL}/cart/`);
+    const response = await fetch(`${API_BASE_URL}/cart/`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': csrfToken,
+      },
+      credentials: 'include',
+    });
+    console.log('responseData')
+    const responseData = await response.json();
+    return responseData;
   } catch (error) {
     console.error("Error fetching cart items:", error);
     throw error;
@@ -56,9 +89,18 @@ export const fetchCartItems = async () => {
 export const removeCourseFromCart = async (courseId) => {
   try {
       console.log(`Sending DELETE request for course ID: ${courseId}`);
-      const response = await instance.delete(`${API_BASE_URL}/cart/${courseId}/`);
-      console.log("API Response:", response.data);
-      return response.data;
+      // const response = await instance.delete(`${API_BASE_URL}/cart/${courseId}/`);
+      const response = await fetch(`${API_BASE_URL}/cart/${courseId}/`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': csrfToken,
+        },
+      });
+    const responseData = await response.json();
+
+      console.log("API Response:", responseData);
+      return responseData;
   } catch (error) {
       console.error(`Error removing course ${courseId}:`, error);
       throw error;
@@ -69,8 +111,16 @@ export const removeCourseFromCart = async (courseId) => {
 // Confirm enrollment
 export const confirmEnrollment = async () => {
   try {
-    const response = await instance.post(`${API_BASE_URL}/cart/confirm/`);
-    return response.data;
+    // const response = await instance.post(`${API_BASE_URL}/cart/confirm/`);
+    const response = await fetch(`${API_BASE_URL}/cart/confirm/`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': csrfToken,
+      },
+    });
+    const responseData = await response.json();
+    return responseData;
   } catch (error) {
     console.error("Error confirming enrollment:", error);
     throw error;
@@ -80,8 +130,17 @@ export const confirmEnrollment = async () => {
 // Submit contact form
 export const submitContactForm = async (data) => {
   try {
-    const response = await instance.post(`${API_BASE_URL}/contact/`, data);
-    return response.data;
+    // const response = await instance.post(`${API_BASE_URL}/contact/`, data);
+    const response = await fetch(`${API_BASE_URL}/contact/`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': csrfToken,
+      },
+      body: JSON.stringify({data}),
+    });
+    const responseData = await response.json();
+    return responseData;
   } catch (error) {
     console.error("Error submitting contact form:", error);
     throw error;
@@ -100,7 +159,8 @@ export const registerUser = async (name,email,password) => {
       },
       body: JSON.stringify({"username":name,"email":email,"password":password }),
     });
-    return response.data;
+    const responseData = await response.json();
+    return responseData;
   } catch (error) {
     console.error("Error registering user:", error);
     throw error;
@@ -119,6 +179,8 @@ export const loginUser = async (credentials) => {
       body: JSON.stringify({credentials}),
     });
     const responseData = await response.json();
+    console.log("CSRF",responseData.user.username);
+    setCookie(responseData.user.username,responseData.csrf_token,1);
     return responseData;
   } catch (error) {
     console.error("Error logging in user:", error);

@@ -16,6 +16,7 @@ const Cart = () => {
             try {
                 const cartData = await fetchCartItems(); // Fetch cart item IDs from API
                 // Map cart item IDs to course details in `all_courses.js`
+                console.log("cartData",cartData)
                 const matchedCourses = cartData.map((id) =>
                     data_product.find((course) => course.id === id)
                 ).filter(Boolean); // Filter out undefined matches

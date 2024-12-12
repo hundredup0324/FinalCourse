@@ -3,9 +3,12 @@ import './NavBar.css';
 import cart from '../Assets/cart.jpg';
 import logo from '../Assets/Tutoring+.png';
 import { Link } from 'react-router-dom';
+// import { checkCookie } from '../../utils/auth';
 
 const NavBar = () => {
   const [menu, setMenu] = useState("home");
+  // const cookie = getCookie();
+  // console.log('cookie',cookie);
 
   return (
     <div className='navbar'>
@@ -44,9 +47,15 @@ const NavBar = () => {
         <Link to='/register'>
           <button className='register'>Register</button>
         </Link>
+        {/* {cookie == "login" ? (<> <Link to='/logout'>
+          <button className='login'>Logout</button>
+        </Link></>) : (<><Link to='/login'>
+          <button className='login'>Login</button>
+        </Link></>)} */}
         <Link to='/login'>
           <button className='login'>Login</button>
         </Link>
+
         <Link to='/cart'>
           <img src={cart} alt="" />
         </Link>
